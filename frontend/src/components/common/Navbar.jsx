@@ -4,6 +4,7 @@ import useAuthStore from "../../store/authStore";
 import useCartStore from "../../store/cartStore";
 import { FaShoppingCart, FaUser, FaSignOutAlt, FaCog, FaBars, FaTimes } from "react-icons/fa";
 import { FiGrid, FiPieChart, FiLogOut, FiList } from "react-icons/fi";
+import Logo from './Logo';
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuthStore();
@@ -48,7 +49,10 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            {/* <img src="/logo.png" alt="Logo" className="h-10 w-auto" /> */}
+            <Logo 
+              className="h-10 w-auto" 
+              color={isScrolled ? "#4F46E5" : "#FFFFFF"}
+            />
             <span
               className={`text-2xl font-bold ${
                 isScrolled ? "text-indigo-600" : "text-white"

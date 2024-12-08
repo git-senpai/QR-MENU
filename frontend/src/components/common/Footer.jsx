@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import Logo from './Logo';
 
 export default function Footer() {
   return (
@@ -33,7 +34,7 @@ export default function Footer() {
           {/* Brand Section */}
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              {/* <img src="/logo.png" alt="Logo" className="h-8 w-auto" /> */}
+              <Logo className="h-8 w-auto" color="#FFFFFF" />
               <span className="text-2xl font-bold text-white">FoodOrder</span>
             </div>
             <p className="text-gray-400 mb-6">
