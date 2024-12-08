@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
 import Menu from "./components/customer/Menu";
@@ -37,99 +37,101 @@ export default function App() {
     return children;
   };
 
-  return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      <Navbar />
-      <main className="flex-grow container mx-auto px-4 py-8 mt-20">
-        <ScrollToTop />
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+    return (
+      <BrowserRouter>
+        <div className="flex flex-col min-h-screen bg-gray-50">
+          <Navbar />
+          <main className="flex-grow container mx-auto px-4 py-8 mt-20">
+            <ScrollToTop />
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/menu" element={<Menu />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
 
-          {/* Protected User Routes */}
-          <Route
-            path="/user/dashboard"
-            element={
-              <UserRoute>
-                {user?.role === "admin" ? (
-                  <Navigate to="/dashboard" replace />
-                ) : (
-                  <UserDashboard />
-                )}
-              </UserRoute>
-            }
-          />
-          <Route
-            path="/order-confirmation"
-            element={
-              <UserRoute>
-                <OrderConfirmation />
-              </UserRoute>
-            }
-          />
+              {/* Protected User Routes */}
+              <Route
+                path="/user/dashboard"
+                element={
+                  <UserRoute>
+                    {user?.role === "admin" ? (
+                      <Navigate to="/dashboard" replace />
+                    ) : (
+                      <UserDashboard />
+                    )}
+                  </UserRoute>
+                }
+              />
+              <Route
+                path="/order-confirmation"
+                element={
+                  <UserRoute>
+                    <OrderConfirmation />
+                  </UserRoute>
+                }
+              />
 
-          {/* Protected Admin Routes */}
-          <Route
-            path="/dashboard"
-            element={
-              <AdminRoute>
-                <Dashboard />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/admin/create-item"
-            element={
-              <AdminRoute>
-                <CreateItem />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/admin/menu"
-            element={
-              <AdminRoute>
-                <MenuManagement />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/admin/orders"
-            element={
-              <AdminRoute>
-                <OrdersList />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/admin/statistics"
-            element={
-              <AdminRoute>
-                <Statistics />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="/admin/menu/edit/:id"
-            element={
-              <AdminRoute>
-                <EditItem />
-              </AdminRoute>
-            }
-          />
+              {/* Protected Admin Routes */}
+              <Route
+                path="/dashboard"
+                element={
+                  <AdminRoute>
+                    <Dashboard />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/create-item"
+                element={
+                  <AdminRoute>
+                    <CreateItem />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/menu"
+                element={
+                  <AdminRoute>
+                    <MenuManagement />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/orders"
+                element={
+                  <AdminRoute>
+                    <OrdersList />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/statistics"
+                element={
+                  <AdminRoute>
+                    <Statistics />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/menu/edit/:id"
+                element={
+                  <AdminRoute>
+                    <EditItem />
+                  </AdminRoute>
+                }
+              />
 
-          {/* Error Route */}
-          <Route
-            path="*"
-            element={<Error message="Page not found" showHome={true} />}
-          />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
-  );
+              {/* Error Route */}
+              <Route
+                path="*"
+                element={<Error message="Page not found" showHome={true} />}
+              />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    );
 }
