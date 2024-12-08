@@ -38,7 +38,6 @@ export default function App() {
   };
 
     return (
-      <BrowserRouter>
         <div className="flex flex-col min-h-screen bg-gray-50">
           <Navbar />
           <main className="flex-grow container mx-auto px-4 py-8 mt-20">
@@ -132,6 +131,6 @@ export default function App() {
           </main>
           <Footer />
         </div>
-      </BrowserRouter>
+      
     );
 }
