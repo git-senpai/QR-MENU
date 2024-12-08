@@ -37,7 +37,10 @@ export default function Cart() {
 
     try {
       const orderData = {
-        ...orderDetails,
+        customerName: orderDetails.customerName,
+        customerEmail: orderDetails.customerEmail,
+        tableNumber: orderDetails.tableNumber,
+        notes: orderDetails.notes,
         items: items.map((item) => ({
           _id: item._id,
           name: item.name,
@@ -47,12 +50,27 @@ export default function Cart() {
         total: getTotal(),
       };
 
+      console.log('Submitting order:', orderData);
+
       const response = await api.post('/orders', orderData);
-      clearCart();
-      navigate(`/order-confirmation?orderId=${response._id}`);
+      
+      if (response && response._id) {
+        clearCart();
+        navigate(`/order-confirmation?orderId=${response._id}`);
+      } else {
+        throw new Error('Invalid response from server');
+      }
     } catch (error) {
       console.error("Failed to place order:", error);
-      alert("Failed to place order. Please try again.");
+      let errorMessage = "Failed to place order. Please try again.";
+      
+      if (error.message) {
+        errorMessage = error.message;
+      } else if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      }
+      
+      alert(errorMessage);
     } finally {
       setIsLoading(false);
     }

@@ -6,17 +6,41 @@ const orderSchema = new mongoose.Schema({
     unique: true,
     default: () => 'ORD-' + Math.random().toString(36).substr(2, 6).toUpperCase()
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  customerName: {
+    type: String,
     required: true
   },
+  customerEmail: {
+    type: String,
+    required: true
+  },
+  tableNumber: String,
   items: [{
-    name: String,
-    quantity: Number,
-    price: Number
+    _id: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    quantity: {
+      type: Number,
+      required: true,
+      min: 1
+    },
+    price: {
+      type: Number,
+      required: true,
+      min: 0
+    }
   }],
-  total: Number,
+  total: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  notes: String,
   status: {
     type: String,
     enum: ['pending', 'preparing', 'ready', 'delivered', 'cancelled'],

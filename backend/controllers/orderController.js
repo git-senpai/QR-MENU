@@ -25,11 +25,17 @@ export const createOrder = async (req, res) => {
       });
     }
 
+    // Create the order
     const order = await Order.create({
       customerName,
       customerEmail,
       tableNumber,
-      items,
+      items: items.map(item => ({
+        _id: item._id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity
+      })),
       total,
       notes,
       status: 'pending'
