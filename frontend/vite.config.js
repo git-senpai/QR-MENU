@@ -9,6 +9,8 @@ export default defineConfig({
     port: 5174, // Optional: Specify the port
   },
   define: {
-    'import.meta.env.VITE_API_URL': JSON.stringify('http://localhost:5000/api'),
+    "import.meta.env.VITE_API_URL": JSON.stringify(
+      "https://qr-menu-hp3b.onrender.com/api"
+    ),
   },
 });
